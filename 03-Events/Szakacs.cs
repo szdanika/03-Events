@@ -24,6 +24,7 @@ namespace _03_Events
         }
         public void Foz()
         {
+            Sef.kiiro(Nev + " főz '" + specialitas + "' -t");
             HozzavaloElkeszult?.Invoke(specialitas);
         }
     }

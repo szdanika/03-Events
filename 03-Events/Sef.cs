@@ -22,15 +22,16 @@ namespace _03_Events
         };
         public void Megrendeles(string etelNeve)
         {
+            kiiro("Séf: Rendelés beérkezett '" + etelNeve + "'");
             bool volt = false;
             foreach(var item in receptek)
             {
                 if(etelNeve == item.Megnevezes)
                 {
                     volt = true;
+                    Elkeszites(item);
                 }
             }
-            kiiro("beérkezett a rendelés:" + etelNeve);
             if (!volt)
                 RendelesNemTeljesitheto?.Invoke(etelNeve);
         }
@@ -47,14 +48,17 @@ namespace _03_Events
         {
             szuksegesHozzavaloSzam--;
             if (szuksegesHozzavaloSzam == 0)
+            {
+                kiiro("Séf:Elkészült a '" + hozzavalo + "'");
                 RendelesTeljesitve?.Invoke(hozzavalo);
+            }
         }
         public void felvesz(Szakacs szakacs)
         {
             HozzavaloSzukseges += szakacs.SefKerValamit;
             szakacs.HozzavaloElkeszult += SzakacsElkeszult;
         }
-        public void kiiro(string szoveg)
+        public static void kiiro(string szoveg)
         {
             Console.WriteLine(szoveg);
         }

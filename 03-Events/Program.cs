@@ -16,7 +16,7 @@ namespace _03_Events
         }
         public static void Sikerult(string nev)
         {
-            Console.WriteLine("Rendelés teljesítve");
+            Console.WriteLine("* Rendelés teljesítve : '"+ nev +"'");
         }
         public static void NemSikerult(string nev)
         {
