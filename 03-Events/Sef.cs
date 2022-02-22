@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace _03_Events
 {
-    public delegate void RendelesTeljesitesKezelo(string etelNeve);
-    public delegate void HozzavaloSzuksegesKezelo(string hozzavalo);
-
     internal class Sef
     {
-        RendelesTeljesitesKezelo RendelesTeljesitve;
-        RendelesTeljesitesKezelo RendelesNemTeljesitheto;
-        HozzavaloSzuksegesKezelo HozzavaloSzuksegesKezelo;
-        Etel.HozzavaloElkeszultKezelo asd;
+        public event RendelesTeljesitesKezelo RendelesTeljesitve;
+        public event RendelesTeljesitesKezelo RendelesNemTeljesitheto;
+        public event HozzavaloSzuksegesKezelo HozzavaloSzukseges;
 
 
         Etel[] receptek = new Etel[]
@@ -34,6 +30,7 @@ namespace _03_Events
                     volt = true;
                 }
             }
+            kiiro("beérkezett a rendelés:" + etelNeve);
             if (!volt)
                 RendelesNemTeljesitheto?.Invoke(etelNeve);
         }
@@ -43,7 +40,7 @@ namespace _03_Events
             szuksegesHozzavaloSzam = recept.Hozzavalok.Length;
             foreach(string item in recept.Hozzavalok)
             {
-                HozzavaloSzuksegesKezelo?.Invoke(item);
+                HozzavaloSzukseges?.Invoke(item);
             }
         }
         public void SzakacsElkeszult(string hozzavalo)
@@ -51,6 +48,15 @@ namespace _03_Events
             szuksegesHozzavaloSzam--;
             if (szuksegesHozzavaloSzam == 0)
                 RendelesTeljesitve?.Invoke(hozzavalo);
+        }
+        public void felvesz(Szakacs szakacs)
+        {
+            HozzavaloSzukseges += szakacs.SefKerValamit;
+            szakacs.HozzavaloElkeszult += SzakacsElkeszult;
+        }
+        public void kiiro(string szoveg)
+        {
+            Console.WriteLine(szoveg);
         }
 
     }

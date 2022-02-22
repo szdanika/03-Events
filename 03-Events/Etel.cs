@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace _03_Events
 {
+    public delegate void RendelesTeljesitesKezelo(string etelNeve);
+    public delegate void HozzavaloSzuksegesKezelo(string hozzavalo);
+    public delegate void HozzavaloElkeszultKezelo(string hozzavalo);
     internal class Etel
     {
         String megnevezes;
@@ -17,8 +20,5 @@ namespace _03_Events
             this.megnevezes = megnevezes;
             this.hozzavalok = hozzavalok;
         }
-        public delegate void RendelesTeljesitesKezelo(string etelNeve);
-        public delegate void HozzavaloSzuksegesKezelo(string hozzavalo);
-        public delegate void HozzavaloElkeszultKezelo(string hozzavalo);
     }
 }

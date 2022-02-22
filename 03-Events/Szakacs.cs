@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _03_Events
 {
-    public delegate void HozzavaloElkeszultKezelo(string hozzavalo);
     internal class Szakacs
     {
+        public event HozzavaloElkeszultKezelo HozzavaloElkeszult;
         private string nev;
         public string Nev { get { return nev; } }
         string specialitas;
@@ -24,7 +24,7 @@ namespace _03_Events
         }
         public void Foz()
         {
-            HozzavaloElkeszultKezelo();
+            HozzavaloElkeszult?.Invoke(specialitas);
         }
     }
 }
