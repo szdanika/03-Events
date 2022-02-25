@@ -57,10 +57,19 @@ namespace _03_Events
         {
             HozzavaloSzukseges += szakacs.SefKerValamit;
             szakacs.HozzavaloElkeszult += SzakacsElkeszult;
+            if(szakacs is KorlatosSzakacs)
+            {
+                (szakacs as KorlatosSzakacs).HozzavaloNemKeszithetoEl += SzakacsHibatJelez;
+            }
         }
         public static void kiiro(string szoveg)
         {
             Console.WriteLine(szoveg);
+        }
+        public void SzakacsHibatJelez(string hozzavalo)
+        {
+            Console.WriteLine("Szakacs hibat jelez : '" + hozzavalo+"'");
+            RendelesNemTeljesitheto(hozzavalo);
         }
 
     }

@@ -11,7 +11,7 @@ namespace _03_Events
         public event HozzavaloElkeszultKezelo HozzavaloElkeszult;
         private string nev;
         public string Nev { get { return nev; } }
-        string specialitas;
+        protected string specialitas;
         public Szakacs(string nev, string specialitas)
         {
             this.nev = nev;
@@ -22,7 +22,7 @@ namespace _03_Events
             if (hozzavalo == specialitas)
                 Foz();
         }
-        public void Foz()
+        public virtual void Foz()
         {
             Sef.kiiro(Nev + " főz '" + specialitas + "' -t");
             HozzavaloElkeszult?.Invoke(specialitas);
